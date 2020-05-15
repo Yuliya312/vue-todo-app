@@ -7,11 +7,24 @@ export default new VueRouter({
   mode: "history",
   base: process.env.BASE_URL,
   routes: [
+    // {
+    //   path: '/login',
+    //   name: 'Login',
+    //   meta: { layout: 'auth' },
+    //   component: () => import('../views/Login.vue')
+    // },
+    // {
+    //   path: '/register',
+    //   name: 'Register',
+    //   meta: { layout: 'auth' },
+    //   component: () => import('../views/Register.vue')
+    // },
     {
-      path: "/todo",
-      name: "todo",
-      meta: { layout: "popup" },
-      component: () => import("../views/Todo.vue")
+      path: "/note/:id?",
+      name: "note",
+      props: true,
+      meta: { layout: "note" },
+      component: () => import("../views/Note.vue")
     },
     {
       path: "/",

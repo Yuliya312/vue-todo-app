@@ -7,17 +7,17 @@
 </template>
 
 <script>
-import TodoLayout from "@/layouts/TodoLayout";
+import NoteLayout from "@/layouts/NoteLayout";
 import HomeLayout from "@/layouts/HomeLayout";
 
 export default {
   computed: {
     layout() {
-      return (this.$route.meta.layout || "todo") + "-layout";
+      return (this.$route.meta.layout || "note") + "-layout";
     }
   },
   components: {
-    TodoLayout,
+    NoteLayout,
     HomeLayout
   }
 }

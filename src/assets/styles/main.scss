@@ -21,9 +21,71 @@ html {
   font-size: 10px;
 }
 
+html,
+body,
+h1,
+h2,
+h3,
+p,
+a {
+  margin: 0;
+  padding: 0;
+}
+
 body {
   margin: 0;
+  height: 100%;
   font-family: 'Myriad Pro Regular', sans-serif;
   font-weight: 400;
-  background-color: #ddd;
+  line-height: 1.7;
+  font-size: $default-font-size;
+  color: $color-black;
+
+}
+
+.app-page {
+  height: 100%;
+  background-image: linear-gradient(
+    to right bottom,
+    rgba($color-blue, 0.2),
+    rgba($color-blue, 0.6)),
+    url('../assets/img/city.jpg');
+  background-size: cover;
+  background-position: top;
+}
+
+.btn {
+  border: 1px solid $color-primary;
+  background-color: $color-primary;
+  border-radius: 0.4rem;
+  height: auto;
+  min-height: 0.32rem;
+  padding: 0.7rem 2.1rem;
+  font-size: 1.6rem;
+
+  &:hover,
+  &:focus {
+    background-color: rgba($color-primary-dark, 0.8);
+    color: $color-white;
+    border-color: $color-primary-dark;
+  }
+
+  &:active {
+    background-color: rgba($color-primary-dark, 1);
+    transform: scale(1.1);
+  }
+}
+
+.input {
+  box-sizing: border-box;
+  margin-bottom: 30px;
+  padding: 7px 11px;
+  font-size: 16px;
+  line-height: 24px;
+  word-wrap: break-word;
+  background-color: #fafafa;
+  border: 1px solid #dbdbdb;
+  border-radius: 4px;
+  color: #363636;
+  transition: .2s;
 }
