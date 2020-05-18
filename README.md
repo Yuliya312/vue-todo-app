@@ -1,5 +1,9 @@
 # todo-app
 
+## Demo
+
+- [DEMO LINK](https://vue-todo-app-2020-05.herokuapp.com/)
+
 ## Project setup
 ```
 npm install
@@ -19,6 +23,3 @@ npm run build
 ```
 npm run lint
 ```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).

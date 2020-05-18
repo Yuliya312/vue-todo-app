@@ -10,6 +10,7 @@
       class="input new-todo__title"
       placeholder="Enter new todo please"
       v-model.trim="note.todos.todoTitle"
+      v-focus
     />
     <div class="form__buttons">
       <button class="btn form__btn">
@@ -57,6 +58,13 @@ export default {
       },
     }
   },
+  directives: {
+    focus: {
+      inserted: function (el) {
+        el.focus()
+      }
+    }
+  },
   methods: {
     ...mapActions([
         'updateNotes'
@@ -76,7 +84,7 @@ export default {
     },
     clearTodoInput() {
       this.note.todos.todoTitle="";
-    },
+    }
   }
 }
 

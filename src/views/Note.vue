@@ -1,43 +1,48 @@
 <template>
-  <div class="wrapper">
-    <div class="note-vue__empty" v-if="!note.title">
-      <router-link to="/" class="btn">
-        Home
-      </router-link>
+  <section
+    id="note-layout"
+    class="note-layout"
+  >
+    <div :scroll="handleScroll" :class="[isScrolling && 'scrolled', 'home-layout']">
+      <div class="note-vue__empty" v-if="!note.title">
+        <router-link to="/" class="btn">
+          Home
+        </router-link>
+      </div>
+      <div v-else class="note-vue">
+        <h2 class="note-vue__title">Edit note</h2>
+        <form 
+          action=""
+          class="note-vue__form form"
+          @submit.prevent="saveEditNote" 
+        >
+          <input
+            type="text"
+            name="note"
+            class="input form__input"
+            v-model.trim="note.title"
+          />
+          <div class="form__buttons">
+            <button class="btn form__btn">
+              Save changes
+            </button>
+            <button
+              type="button"
+              class="btn form__btn"
+              @click="cancel"
+            >
+              Cancel
+            </button>
+          </div>
+        </form>
+        <NewTodo :note="currentNote"/>
+        <CurrentTodos 
+          :currentNote="currentNote"
+          @finishEditing="finishEditing(currentTodo = $event)"
+          />
+      </div>
     </div>
-    <section v-else class="note-vue">
-      <h2 class="note-vue__title">Edit note</h2>
-      <form 
-        action=""
-        class="note-vue__form form"
-        @submit.prevent="saveEditNote" 
-      >
-        <input
-          type="text"
-          name="note"
-          class="input form__input"
-          v-model.trim="note.title"
-        />
-        <div class="form__buttons">
-          <button class="btn form__btn">
-            Save changes
-          </button>
-          <button
-            type="button"
-            class="btn form__btn"
-            @click="cancel"
-          >
-            Cancel
-          </button>
-        </div>
-      </form>
-      <NewTodo :note="currentNote"/>
-      <CurrentTodos 
-        :currentNote="currentNote"
-        @finishEditing="finishEditing(currentTodo = $event)"
-        />
-    </section>
-  </div>
+  </section>
 </template>
 
 <script>
@@ -46,7 +51,7 @@
   import CurrentTodos from '@/components/CurrentTodos';
 
   export default {
-    name: 'main-layout',
+    name: 'note',
     components: {
       NewTodo,
       CurrentTodos,
@@ -59,6 +64,7 @@
           todos: this.currentNote.todos,
         },
         currentTodo: '',
+        isScrolling: false
       }
     },
     computed: {
@@ -66,6 +72,12 @@
         'allNotes',
         'currentNoteId'
       ]),
+    },
+    created () {
+      window.addEventListener('scroll', this.handleScroll);
+    },
+    destroyed () {
+      window.removeEventListener('scroll', this.handleScroll);
     },
     props: {
       currentNote: {
@@ -102,6 +114,10 @@
         }
         localStorage.setItem('notes', JSON.stringify(this.allNotes));
       },
+      handleScroll(ev) {
+        this.isScrolling = true;
+        console.log(this.isScrolling, ev)
+      },
       saveEditNote () {
         if (!this.note.title) {
           return
@@ -121,13 +137,24 @@
 
 <style lang="scss">
   .wrapper {
-    max-width: 1080px;
-    margin: 0 auto;
+    height: 100vh;
+    background-image: linear-gradient(
+      to right bottom,
+      rgba($color-blue, 0.2),
+      rgba($color-blue, 0.6)),
+      url('../assets/img/city.jpg');
+    background-size: cover;
+    background-position: top;
+    transition: 1.5s all cubic-bezier(0.39, 0.575, 0.565, 1);
+  }
+
+  .wrapper.scrolled {
+    height: 100%;
   }
 
   .note-vue {
-    display: inline;
-    /* background-color: rgba(9,30,66,.04); */
+    max-width: 1080px;
+    margin: 0 auto;
 
     &__empty {
       display: flex;

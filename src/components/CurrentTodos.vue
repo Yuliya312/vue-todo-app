@@ -1,39 +1,37 @@
 <template>
-  <div>
-    <ul class="todo-list">
-      <li
-        v-for="todo in note.todos" :key="todo.id"
-        class="todo-list__item"
-        :class="{ completed: todo.completed }"
-      >
-        <div>
-          <input 
-            class="todo-list__checkbox" 
-            type="checkbox" 
-            :checked="todo.completed"
-            v-on:change="todo.completed = !todo.completed" 
-          />
-          <label 
-            v-if="editTodoId !== todo.id"
-            class="todo-list__title"
-          >
-            {{ todo.todoTitle }}
-          </label>
-          <input 
-            v-else class="input todo-item__edit" 
-            type="text" 
-            v-model="todo.todoTitle"
-            @blur="finishEditing" 
-            @keyup.enter="finishEditing(todo)"
-          >
-        </div>
-        <div>
-          <button class="btn todo-list__btn" @click="editTodo(todo)">Edit</button>
-          <button class="btn todo-list__btn" @click="deleteTodo(todo.id)">Delete</button>
-        </div>
-      </li>
-    </ul>
-  </div>
+  <ul class="todo-list">
+    <li
+      v-for="todo in note.todos" :key="todo.id"
+      class="todo-list__item"
+      :class="{ completed: todo.completed }"
+    >
+      <div>
+        <input 
+          class="todo-list__checkbox" 
+          type="checkbox" 
+          :checked="todo.completed"
+          v-on:change="todo.completed = !todo.completed" 
+        />
+        <label 
+          v-if="editTodoId !== todo.id"
+          class="todo-list__title"
+        >
+          {{ todo.todoTitle }}
+        </label>
+        <input 
+          v-else class="input todo-item__edit" 
+          type="text" 
+          v-model="todo.todoTitle"
+          @blur="finishEditing" 
+          @keyup.enter="finishEditing(todo)"
+        >
+      </div>
+      <div>
+        <button class="btn todo-list__btn" @click="editTodo(todo)">Edit</button>
+        <button class="btn todo-list__btn" @click="deleteTodo(todo.id)">Delete</button>
+      </div>
+    </li>
+  </ul>
 </template>
 
 <script>
@@ -101,6 +99,7 @@ export default {
 <style lang="scss">
   .todo-list {
     width: 100%;
+    height: 100%;
     border-radius: 0.4rem;
     background-color: #EBECF0;
     padding: 1rem;
