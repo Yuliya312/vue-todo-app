@@ -23,7 +23,7 @@
             </button>
           </div>
         </div>
-        <ul class="todos">
+        <ul v-if="note.todos.length" class="todos">
           <li class="todos__item" 
             v-for="todo of [...note.todos].splice(0, 3)" 
             :key="todo.id"
